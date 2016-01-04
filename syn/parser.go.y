@@ -25,13 +25,18 @@ type Token struct {
 %type<statement> statement
 %type<expr> expr
 
-%token<tok> IDENT NUMBER VAR ECHO
+%token<tok> IDENT
+%token<tok> NUMBER
+%token<tok> VAR
+%token<tok> ECHO
+%token<tok> CLASS
 
 %left '+' '-'
 %left '*' '/' '%'
 %right UNARY
 
 %%
+
 
 statements
 	:
@@ -54,14 +59,21 @@ statement
 	{
 		$$ = &ExpressionStatement{Expr: $1}
 	}
-	| VAR IDENT '=' expr ';'
+	| IDENT '=' expr ';'
 	{
-		$$ = &VarDefStatement{VarName: $2.lit, Expr: $4}
+		$$ = &VarDefStatement{VarName: $1.lit, Expr: $3}
 	}
 	| ECHO expr ';'
 	{
 		$$ = &EchoStatement{Expr: $2}
 	}
+	| CLASS IDENT '{'  statements '}' ';'
+	{
+		$$ = &ClassStatement{VarName: $2.lit, Statements: $4}
+	}
+
+
+
 
 expr	: NUMBER
 	{

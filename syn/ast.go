@@ -17,17 +17,23 @@ type (
 
 	VarDefStatement struct {
 		VarName string
-		Expr    Expression
+		Expr Expression
 	}
 
 	EchoStatement struct {
 		Expr    Expression
+	}
+
+	ClassStatement struct {
+		VarName string
+		Statements []Statement
 	}
 )
 
 func (x *ExpressionStatement) statement() {}
 func (x *VarDefStatement) statement() {}
 func (x *EchoStatement) statement() {}
+func (x *ClassStatement) statement() {}
 
 type (
 	NumberExpression struct {

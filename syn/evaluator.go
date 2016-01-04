@@ -22,6 +22,13 @@ func Evaluate(statement Statement, env Env) (string, error) {
 		}
 		env[stmt.VarName] = v
 		return fmt.Sprintf("Assign %v to %s", v, stmt.VarName), nil
+
+	case *ClassStatement:
+		for _, class_stmt := range stmt.Statements {
+			Evaluate(class_stmt, env)
+		}
+
+		return "", nil
 	case *EchoStatement:
 		v, err := evaluateExpr(stmt.Expr, env)
 		if err != nil {

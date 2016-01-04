@@ -8,6 +8,7 @@ const (
 var keywords = map[string]int{
 	"var": VAR,
 	"echo": ECHO,
+	"class": CLASS,
 }
 
 type Position struct {
@@ -43,7 +44,7 @@ func (s *Scanner) Scan() (tok int, lit string, pos Position) {
 		switch ch {
 		case -1:
 			tok = EOF
-		case '(', ')', ';', '+', '-', '*', '/', '%', '=':
+		case '(', ')', ';', '+', '-', '*', '/', '%', '=', '{', '}':
 			tok = int(ch)
 			lit = string(ch)
 		}
