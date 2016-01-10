@@ -30,6 +30,7 @@ type Token struct {
 %token<tok> VAR
 %token<tok> ECHO
 %token<tok> CLASS
+%token<tok> FUNCTION
 
 %left '+' '-'
 %left '*' '/' '%'
@@ -71,7 +72,10 @@ statement
 	{
 		$$ = &ClassStatement{VarName: $2.lit, Statements: $4}
 	}
-
+	| IDENT '=' FUNCTION '(' ')' '{' statements '}' ';'
+	{
+		$$ = &FunctionStatement{VarName: $1.lit, Statements: $7}
+	}
 
 
 

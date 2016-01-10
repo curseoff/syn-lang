@@ -28,12 +28,18 @@ type (
 		VarName string
 		Statements []Statement
 	}
+
+	FunctionStatement struct {
+		VarName string
+		Statements []Statement
+	}
 )
 
 func (x *ExpressionStatement) statement() {}
 func (x *VarDefStatement) statement() {}
 func (x *EchoStatement) statement() {}
 func (x *ClassStatement) statement() {}
+func (x *FunctionStatement) statement() {}
 
 type (
 	NumberExpression struct {

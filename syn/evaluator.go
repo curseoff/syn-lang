@@ -29,6 +29,14 @@ func Evaluate(statement Statement, env Env) (string, error) {
 		}
 
 		return "", nil
+
+	case *FunctionStatement:
+		for _, function_stmt := range stmt.Statements {
+			Evaluate(function_stmt, env)
+		}
+
+		return "", nil
+
 	case *EchoStatement:
 		v, err := evaluateExpr(stmt.Expr, env)
 		if err != nil {

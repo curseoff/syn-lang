@@ -9,6 +9,7 @@ var keywords = map[string]int{
 	"var": VAR,
 	"echo": ECHO,
 	"class": CLASS,
+	"function": FUNCTION,
 }
 
 type Position struct {

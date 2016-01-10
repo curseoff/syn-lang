@@ -1,6 +1,7 @@
-class Test {
-    a  = 200;
+users = function() {
+    a = 100;
 };
+
 
 b = a + 50;
 echo b;
